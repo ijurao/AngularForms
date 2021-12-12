@@ -1,0 +1,110 @@
+<h4>Formularios <small>reactive</small></h4>
+<hr>
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="save()">
+
+  <div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+
+        <input class="form-control"
+               type="text"
+               placeholder="Nombre"
+               formControlName="name"
+               [class.is-invalid]="invalidName">
+               <small *ngIf="invalidName" class="text-danger">5 chars</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+
+        <input class="form-control"
+               type="text"
+               placeholder="Apellido"
+               formControlName="surname"
+               [class.is-invalid]="invalidSurname">
+               <small *ngIf="invalidName" class="text-danger">5 chars</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="email"
+             placeholder="Correo electrónico"
+             formControlName="email"
+             [class.is-invalid]="invalidName">
+             <small *ngIf="invalidEmail" class="text-danger">Invalid email</small>
+    </div>
+  </div>
+
+  <div class="form-row row" formGroupName="addrees">
+      <label class="col col-form-label">Direccion</label>
+      <div class="form-row col">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="distrit" formControlName="distrit" [class.is-invalid]="invalidAddreesDistrit">
+          </div>
+      </div>
+      <div class="form-row col">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="postcode" formControlName="postcode"  [class.is-invalid]="invalidAddreesPostCode">
+        </div>
+  </div>
+  </div>
+
+  <div class="row" >
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Hobbie</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="hoobies">
+          <tr *ngFor="let h of hobbiesArray.controls; let i=index">
+            <td>{{ i + 1}}</td>
+            <td>
+              <input class="form-control" type="text" [formControlName]="i">
+
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteHoobie(i - 1)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary btn-block" (click)="addHoobie()">Add</button>
+    </div>
+       
+</div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col">
+      <button type="submit" class="btn btn-outline-primary">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<hr>
+
+<pre>
+   State : {{form.valid}}
+   <br>
+   Status: {{form.status}}
+
+  <br>
+  Value : {{form.value | json}}
+</pre>
