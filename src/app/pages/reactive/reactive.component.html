@@ -59,6 +59,19 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <label class="col-2 col-form-label">User</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="text"
+             placeholder="Correo electrónico"
+             formControlName="user"
+             [class.is-invalid]="invalidUser">
+            
+    </div>
+  </div>
+
   
   <div class="form-group row">
     <label class="col-2 col-form-label">Password1</label>

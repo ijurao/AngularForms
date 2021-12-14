@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,22 @@ passwordsMustMatch(p1:string,p2:string)
 
    }
 }
+
+userAlreadyExist(control:FormControl) : Promise<{[s:string]: boolean}> | Observable<{[s:string]: boolean}>
+{
+
+  return new Promise( (resolve,reject) => {
+     //simulating http requst    
+    setTimeout(() => {
+        if(control.value === 'ijurao')
+        {
+          resolve({exist:true});
+        }else{
+          resolve(null)
+        }
+
+    },3000);
+  }
+  )}
 
 }

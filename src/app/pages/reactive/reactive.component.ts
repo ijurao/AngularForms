@@ -14,9 +14,19 @@ export class ReactiveComponent implements OnInit {
    
     this.buildForm();
     this.loadData();
+    this.createListeners();
 
   }
+  createListeners() {
 
+    this.form.valueChanges.subscribe( form => console.log(form));
+    this.form.statusChanges.subscribe(form => console.log(form));
+  }
+
+  get invalidUser(){
+    return this.form.get('user').invalid && this.form.get('user').touched
+
+  }
   get pass2NoValid(){
 
     let p1 = this.form.get('password1').value;
@@ -57,15 +67,18 @@ export class ReactiveComponent implements OnInit {
         name : ['', [Validators.required, Validators.minLength(5)]],
         surname : ['',[Validators.required,Validators.minLength(5), this.validators.noJurao]],
         email : ['', [Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+        user: ['ijurao',Validators.required,this.validators.userAlreadyExist],
         password1: ['',Validators.required],
         password2: ['',Validators.required],
+        
         addrees: this.fb.group({
           distrit: ['',Validators.required],
           postcode: ['',Validators.required]
         }),
         hoobies : this.fb.array([])
       }, {
-         validators : [this.validators.passwordsMustMatch('password1','password2')]
+         validators : [this.validators.passwordsMustMatch('password1','password2')
+                      ]
 
       });
   }
