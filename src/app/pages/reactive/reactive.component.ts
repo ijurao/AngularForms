@@ -17,6 +17,16 @@ export class ReactiveComponent implements OnInit {
 
   }
 
+  get pass2NoValid(){
+
+    let p1 = this.form.get('password1').value;
+    let p2 = this.form.get('password2').value;
+
+    return !(p1 === p2); 
+  }
+  get pass1NoValid(){
+    return this.form.get('password1').invalid && this.form.get('password1').touched
+  }
   get hobbiesArray(){
     return this.form.get('hoobies') as FormArray
   }
@@ -47,11 +57,16 @@ export class ReactiveComponent implements OnInit {
         name : ['', [Validators.required, Validators.minLength(5)]],
         surname : ['',[Validators.required,Validators.minLength(5), this.validators.noJurao]],
         email : ['', [Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+        password1: ['',Validators.required],
+        password2: ['',Validators.required],
         addrees: this.fb.group({
           distrit: ['',Validators.required],
           postcode: ['',Validators.required]
         }),
         hoobies : this.fb.array([])
+      }, {
+         validators : [this.validators.passwordsMustMatch('password1','password2')]
+
       });
   }
   addHoobie(){

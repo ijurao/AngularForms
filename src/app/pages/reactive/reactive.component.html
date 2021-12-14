@@ -45,18 +45,46 @@
     </div>
   </div>
 
-  <div class="form-row row" formGroupName="addrees">
-      <label class="col col-form-label">Direccion</label>
-      <div class="form-row col">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="distrit" formControlName="distrit" [class.is-invalid]="invalidAddreesDistrit">
-          </div>
-      </div>
-      <div class="form-row col">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="postcode" formControlName="postcode"  [class.is-invalid]="invalidAddreesPostCode">
-        </div>
+  
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="email"
+             placeholder="Correo electrónico"
+             formControlName="email"
+             [class.is-invalid]="invalidName">
+             <small *ngIf="invalidEmail" class="text-danger">Invalid email</small>
+    </div>
   </div>
+
+  
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Password1</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="password"
+             placeholder="password"
+             formControlName="password1"
+             [class.is-invalid]="pass1NoValid">
+             
+    </div>
+  </div>
+
+  
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Password2</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="password"
+             placeholder="password"
+             formControlName="password2"
+             [class.is-invalid]="pass2NoValid"
+             >
+    </div>
   </div>
 
   <div class="row" >
